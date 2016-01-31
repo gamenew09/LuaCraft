@@ -5,8 +5,8 @@ Time: 1/29/16 10:05 PM
 Description: Initializing game
 
 java.lang.NullPointerException: Initializing game
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.createTableFromHashMap(LuaLibraryLoader.java:146)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.register(LuaLibraryLoader.java:82)
+	at com.gamenew09.luacraft.lua.LuaImplementation.createTableFromHashMap(LuaLibraryLoader.java:146)
+	at com.gamenew09.luacraft.lua.LuaImplementation.register(LuaLibraryLoader.java:82)
 	at com.gamenew09.luacraft.LuacraftMod.init(ExampleMod.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -59,8 +59,8 @@ A detailed walkthrough of the error, its code path and all known details is as f
 
 -- Head --
 Stacktrace:
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.createTableFromHashMap(LuaLibraryLoader.java:146)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.register(LuaLibraryLoader.java:82)
+	at com.gamenew09.luacraft.lua.LuaImplementation.createTableFromHashMap(LuaLibraryLoader.java:146)
+	at com.gamenew09.luacraft.lua.LuaImplementation.register(LuaLibraryLoader.java:82)
 	at com.gamenew09.luacraft.LuacraftMod.init(ExampleMod.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

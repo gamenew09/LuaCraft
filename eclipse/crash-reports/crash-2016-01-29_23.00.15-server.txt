@@ -11,7 +11,7 @@ li.cil.repack.org.luaj.vm2.LuaError: assets/gnluacraft/lua/serverstarted.lua:1 a
 	at li.cil.repack.org.luaj.vm2.LuaValue.get(LuaValue.java:1297)
 	at li.cil.repack.org.luaj.vm2.LuaClosure.execute(LuaClosure.java:256)
 	at li.cil.repack.org.luaj.vm2.LuaClosure.call(LuaClosure.java:132)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.runResourceFile(LuaLibraryLoader.java:165)
+	at com.gamenew09.luacraft.lua.LuaImplementation.runResourceFile(LuaLibraryLoader.java:165)
 	at com.gamenew09.luacraft.LuacraftMod.serverStarted(ExampleMod.java:26)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

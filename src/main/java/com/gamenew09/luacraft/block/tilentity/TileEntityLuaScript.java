@@ -1,6 +1,7 @@
 package com.gamenew09.luacraft.block.tilentity;
 
 import com.gamenew09.luacraft.LuacraftMod;
+import com.gamenew09.luacraft.lua.LuaImplementation;
 import li.cil.repack.org.luaj.vm2.LuaValue;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -14,26 +15,32 @@ import java.io.IOException;
  */
 public class TileEntityLuaScript extends TileEntity {
 
+    private LuaImplementation luaEnv;
+
+    public LuaImplementation getLuaEnv() {
+        return luaEnv;
+    }
+
     private String scriptString;
 
     public String getScriptString() {
         return scriptString;
     }
 
-    String start;
-
     public TileEntityLuaScript(NBTTagCompound compound){
+        this();
         readFromNBT(compound);
-        for(int i = 0; i < powerArray.length; i++){
-            powerArray[i] = 15;
-        }
+    }
+
+    public TileEntityLuaScript(){
+        luaEnv = new LuaImplementation();
+        luaEnv.setTileEntity(this);
+        luaEnv.register();
     }
 
     public TileEntityLuaScript(String start){
-        this.start = start;
-        for(int i = 0; i < powerArray.length; i++){
-            powerArray[i] = 15;
-        }
+        this();
+        this.scriptString = start;
     }
 
     public void setScriptString(String scriptString) {
@@ -78,21 +85,36 @@ public class TileEntityLuaScript extends TileEntity {
         }
     }
 
+    public LuaImplementation resetLuaEnv(){
+        return luaEnv = new LuaImplementation();
+    }
+
     public LuaValue runLua(){
         try {
-            return LuacraftMod.getWorldLua().run(scriptString);
+            return luaEnv.run(scriptString);
         }catch (Exception ex){
+            System.out.println("Block at ("+ xCoord +","+ yCoord +","+ zCoord +") errored. Stacktrace:"+ex);
             return LuaValue.NIL;
         }
     }
 
     private int[] powerArray = new int[6];
 
-    public int isProvidingWeakPower(IBlockAccess w, int x, int y, int z, int side) {
+    public int isProvidingStrongPower(IBlockAccess w, int x, int y, int z, int side) {
         try {
+            //System.out.println("Power for side \""+side+"\": "+powerArray[side]);
             return powerArray[side];
         }catch (Throwable ex){
             return 0;
+        }
+    }
+
+    public boolean setPowerStatus(int side, int power) {
+        try {
+            powerArray[side] = power;
+            return true;
+        }catch (Throwable t){
+            return false;
         }
     }
 }

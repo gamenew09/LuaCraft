@@ -7,7 +7,7 @@ Description: Initializing game
 li.cil.repack.org.luaj.vm2.LuaError: [string "print(world.inWorld())"]:1 vm error: java.lang.NullPointerException
 	at li.cil.repack.org.luaj.vm2.LuaClosure.execute(LuaClosure.java:551)
 	at li.cil.repack.org.luaj.vm2.LuaClosure.call(LuaClosure.java:132)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.run(LuaLibraryLoader.java:71)
+	at com.gamenew09.luacraft.lua.LuaImplementation.run(LuaLibraryLoader.java:71)
 	at com.gamenew09.luacraft.LuacraftMod.preInit(ExampleMod.java:20)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -54,7 +54,7 @@ li.cil.repack.org.luaj.vm2.LuaError: [string "print(world.inWorld())"]:1 vm erro
 	at java.lang.reflect.Method.invoke(Method.java:497)
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
 Caused by: java.lang.NullPointerException
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader$1.invoke(LuaLibraryLoader.java:34)
+	at com.gamenew09.luacraft.lua.LuaImplementation$1.invoke(LuaLibraryLoader.java:34)
 	at li.cil.repack.org.luaj.vm2.LuaClosure.execute(LuaClosure.java:373)
 	... 47 more
 
@@ -66,7 +66,7 @@ A detailed walkthrough of the error, its code path and all known details is as f
 Stacktrace:
 	at li.cil.repack.org.luaj.vm2.LuaClosure.execute(LuaClosure.java:551)
 	at li.cil.repack.org.luaj.vm2.LuaClosure.call(LuaClosure.java:132)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.run(LuaLibraryLoader.java:71)
+	at com.gamenew09.luacraft.lua.LuaImplementation.run(LuaLibraryLoader.java:71)
 	at com.gamenew09.luacraft.LuacraftMod.preInit(ExampleMod.java:20)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

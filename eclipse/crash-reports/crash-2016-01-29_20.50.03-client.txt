@@ -5,8 +5,8 @@ Time: 1/29/16 8:50 PM
 Description: Initializing game
 
 java.lang.ArrayIndexOutOfBoundsException: 1
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.createTableFromHashMap(LuaLibraryLoader.java:44)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.<init>(LuaLibraryLoader.java:36)
+	at com.gamenew09.luacraft.lua.LuaImplementation.createTableFromHashMap(LuaLibraryLoader.java:44)
+	at com.gamenew09.luacraft.lua.LuaImplementation.<init>(LuaLibraryLoader.java:36)
 	at com.gamenew09.luacraft.LuacraftMod.preinit(ExampleMod.java:18)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -59,8 +59,8 @@ A detailed walkthrough of the error, its code path and all known details is as f
 
 -- Head --
 Stacktrace:
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.createTableFromHashMap(LuaLibraryLoader.java:44)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.<init>(LuaLibraryLoader.java:36)
+	at com.gamenew09.luacraft.lua.LuaImplementation.createTableFromHashMap(LuaLibraryLoader.java:44)
+	at com.gamenew09.luacraft.lua.LuaImplementation.<init>(LuaLibraryLoader.java:36)
 	at com.gamenew09.luacraft.LuacraftMod.preinit(ExampleMod.java:18)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

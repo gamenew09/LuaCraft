@@ -1,7 +1,7 @@
 package com.gamenew09.luacraft;
 
 import com.gamenew09.luacraft.block.BlockRegistry;
-import com.gamenew09.luacraft.lua.LuaLibraryLoader;
+import com.gamenew09.luacraft.lua.LuaImplementation;
 import com.gamenew09.luacraft.networking.MessageUpdateLuaScriptTileEntity;
 import com.gamenew09.luacraft.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -24,10 +24,10 @@ import java.io.File;
 public class LuacraftMod
 {
 
-    private static LuaLibraryLoader coreLua;
-    private static LuaLibraryLoader worldLua;
+    private static LuaImplementation coreLua;
+    private static LuaImplementation worldLua;
 
-    public static LuaLibraryLoader getWorldLua(){
+    public static LuaImplementation getWorldLua(){
         return worldLua;
     }
 
@@ -42,11 +42,11 @@ public class LuacraftMod
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        network = NetworkRegistry.INSTANCE.newSimpleChannel("MyChannel");
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(Resources.MOD_ID+"channel");
         network.registerMessage(MessageUpdateLuaScriptTileEntity.Handler.class, MessageUpdateLuaScriptTileEntity.class, 0, Side.SERVER);
 
-        coreLua = new LuaLibraryLoader();
-        worldLua = new LuaLibraryLoader();
+        coreLua = new LuaImplementation();
+        worldLua = new LuaImplementation();
 
         coreLua.register();
         worldLua.register();

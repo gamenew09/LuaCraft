@@ -41,7 +41,7 @@ public class GuiLuaScript extends GuiScreen {
     @Override
     protected void keyTyped(char p_73869_1_, int p_73869_2_) {
         if(p_73869_2_ == 16){
-            tileEntity.setScriptString("print(world.inWorld())");
+            tileEntity.setScriptString("print(redstone.output(0, 15))");
             System.out.println("Sending TileEntityUpdate Packet to server. "+tileEntity.getScriptString());
             updateTileEntity();
         }

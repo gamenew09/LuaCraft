@@ -23,7 +23,7 @@ li.cil.repack.org.luaj.vm2.LuaError: [string "G:\luacraft\eclipse\.\saves\Test12
 	at li.cil.repack.org.luaj.vm2.Globals.load(Globals.java:216)
 	at li.cil.repack.org.luaj.vm2.Globals.load(Globals.java:210)
 	at li.cil.repack.org.luaj.vm2.Globals.load(Globals.java:203)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.runWorldLua(LuaLibraryLoader.java:215)
+	at com.gamenew09.luacraft.lua.LuaImplementation.runWorldLua(LuaLibraryLoader.java:215)
 	at com.gamenew09.luacraft.LuacraftMod.serverStarted(LuacraftMod.java:51)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

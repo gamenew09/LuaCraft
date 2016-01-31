@@ -7,7 +7,7 @@ Description: Exception in server tick loop
 li.cil.repack.org.luaj.vm2.LuaError: load G:\luacraft\eclipse\.\world\lua\main.lua: li.cil.repack.org.luaj.vm2.LuaError: load @G:\luacraft\eclipse\.\world\lua\main.lua: java.lang.NullPointerException
 	at li.cil.repack.org.luaj.vm2.LuaValue.error(LuaValue.java:1179)
 	at li.cil.repack.org.luaj.vm2.Globals.loadfile(Globals.java:183)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.runWorldLua(LuaLibraryLoader.java:210)
+	at com.gamenew09.luacraft.lua.LuaImplementation.runWorldLua(LuaLibraryLoader.java:210)
 	at com.gamenew09.luacraft.LuacraftMod.serverStarted(LuacraftMod.java:63)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

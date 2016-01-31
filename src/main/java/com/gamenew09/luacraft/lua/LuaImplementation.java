@@ -1,11 +1,13 @@
 package com.gamenew09.luacraft.lua;
 
 import com.gamenew09.luacraft.Resources;
+import com.gamenew09.luacraft.block.tilentity.TileEntityLuaScript;
 import com.gamenew09.luacraft.lua.types.LuaItemstack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import li.cil.repack.org.luaj.vm2.*;
 import li.cil.repack.org.luaj.vm2.lib.VarArgFunction;
 import li.cil.repack.org.luaj.vm2.lib.jse.CoerceJavaToLua;
+import li.cil.repack.org.luaj.vm2.lib.jse.CoerceLuaToJava;
 import li.cil.repack.org.luaj.vm2.lib.jse.JsePlatform;
 import net.minecraft.block.Block;
 import net.minecraft.server.MinecraftServer;
@@ -18,7 +20,7 @@ import java.util.Map;
  * Created by TylerDesktop on 1/28/2016.
  */
 
-public class LuaLibraryLoader {
+public class LuaImplementation {
 
     private Globals globals;
 
@@ -44,16 +46,46 @@ public class LuaLibraryLoader {
         }
     };
 
-    public  LuaLibraryLoader(){
+    public LuaImplementation(){
         globals = JsePlatform.standardGlobals();
-
     }
 
+    public LuaImplementation(TileEntityLuaScript te){
+        this();
+        tileEntityLuaScript = te;
+    }
+
+    /**
+     * Helper function to create a Userdata object using CoerceJavaToLua.
+     * @param obj
+     * @return LuaUserdata or LuaValue.NIL.
+     */
     public static LuaValue getUserdata(Object obj){
         return CoerceJavaToLua.coerce(obj);
     }
 
+
+    private void registerEnums(){
+        HashMap<String, LuaValue> enumMap = new HashMap<String, LuaValue>();
+
+        HashMap<String, LuaValue> enumBlockFace = new HashMap<String, LuaValue>();
+        enumBlockFace.put("Down", LuaInteger.valueOf(1));
+        enumBlockFace.put("Up", LuaInteger.valueOf(0));
+        enumBlockFace.put("North", LuaInteger.valueOf(2));
+        enumBlockFace.put("South", LuaInteger.valueOf(3));
+        enumBlockFace.put("West", LuaInteger.valueOf(4));
+        enumBlockFace.put("East", LuaInteger.valueOf(5));
+
+        enumMap.put("BlockFace", createTableFromHashMap(enumBlockFace));
+
+        globals.set("Enum", createTableFromHashMap(enumMap));
+    }
+
+    TileEntityLuaScript tileEntityLuaScript = null;
+
     public void register(){
+        registerEnums();
+
         HashMap<String, LuaValue> worldMap = new HashMap<String, LuaValue>();
 
         worldMap.put("inWorld", new VarArgFunction() {
@@ -127,6 +159,51 @@ public class LuaLibraryLoader {
         });
 
         globals.set("itemstack", createTableFromHashMap(itemstackMap));
+
+        HashMap<String, LuaValue> redstoneMap = new HashMap<String, LuaValue>();
+
+        redstoneMap.put("output", new VarArgFunction() {
+            @Override
+            public Varargs invoke(Varargs args) {
+                if(tileEntityLuaScript == null)
+                    throw new LuaError("\"redstone.output\" can only be used in \"LuaScript\" blocks.");
+
+                int side = args.toint(1);
+                int power = args.toint(2);
+
+                return createVarArgs(LuaValue.valueOf(tileEntityLuaScript.setPowerStatus(side, power)));
+            }
+        });
+
+        redstoneMap.put("isPoweredIndirectly", new VarArgFunction() {
+            @Override
+            public Varargs invoke(Varargs args) {
+                int x = 0;
+                int y = 0;
+                int z = 0;
+                int dim = 0;
+                if(args.narg() == 0){
+                    if(tileEntityLuaScript == null)
+                        throw new LuaError("\"redstone.isPoweredIndirectly\" with no parameters can only be used in \"LuaScript\" blocks.");
+                    x = tileEntityLuaScript.xCoord;
+                    y = tileEntityLuaScript.yCoord;
+                    z = tileEntityLuaScript.zCoord;
+                }else{
+                    x = args.toint(1);
+                    y = args.toint(2);
+                    z = args.toint(3);
+                    if(args.narg() > 3)
+                        dim = args.toint(4);
+                }
+                return createVarArgs(LuaValue.valueOf(MinecraftServer.getServer().worldServerForDimension(dim).isBlockIndirectlyGettingPowered(x, y, z)));
+            }
+        });
+
+        globals.set("redstone", createTableFromHashMap(redstoneMap));
+    }
+
+    public void setTileEntity(TileEntityLuaScript tileEntityLuaScript) {
+        this.tileEntityLuaScript = tileEntityLuaScript;
     }
 
     public static class HookInfo{

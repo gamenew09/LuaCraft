@@ -7,8 +7,8 @@ Description: Initializing game
 java.lang.NullPointerException: Initializing game
 	at li.cil.repack.org.luaj.vm2.LuaTable.<init>(LuaTable.java:121)
 	at li.cil.repack.org.luaj.vm2.LuaValue.tableOf(LuaValue.java:3678)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.createTableFromHashMap(LuaLibraryLoader.java:150)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.register(LuaLibraryLoader.java:82)
+	at com.gamenew09.luacraft.lua.LuaImplementation.createTableFromHashMap(LuaLibraryLoader.java:150)
+	at com.gamenew09.luacraft.lua.LuaImplementation.register(LuaLibraryLoader.java:82)
 	at com.gamenew09.luacraft.LuacraftMod.init(ExampleMod.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -58,8 +58,8 @@ A detailed walkthrough of the error, its code path and all known details is as f
 Stacktrace:
 	at li.cil.repack.org.luaj.vm2.LuaTable.<init>(LuaTable.java:121)
 	at li.cil.repack.org.luaj.vm2.LuaValue.tableOf(LuaValue.java:3678)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.createTableFromHashMap(LuaLibraryLoader.java:150)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.register(LuaLibraryLoader.java:82)
+	at com.gamenew09.luacraft.lua.LuaImplementation.createTableFromHashMap(LuaLibraryLoader.java:150)
+	at com.gamenew09.luacraft.lua.LuaImplementation.register(LuaLibraryLoader.java:82)
 	at com.gamenew09.luacraft.LuacraftMod.init(ExampleMod.java:29)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

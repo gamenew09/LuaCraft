@@ -519,7 +519,7 @@
 [12:35:22] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStartedEvent to mod Forge
 [12:35:22] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Minecraft Forge took 0.000s
 [12:35:22] [Server thread/TRACE] [gnluacraft/gnluacraft]: Sending event FMLServerStartedEvent to mod gnluacraft
-[12:35:22] [Server thread/INFO] [STDOUT/gnluacraft]: [com.gamenew09.luacraft.lua.LuaLibraryLoader:runWorldLua:209]: G:\luacraft\eclipse\world\lua\main.lua
+[12:35:22] [Server thread/INFO] [STDOUT/gnluacraft]: [com.gamenew09.luacraft.lua.LuaImplementation:runWorldLua:209]: G:\luacraft\eclipse\world\lua\main.lua
 [12:35:22] [Server thread/TRACE] [gnluacraft/gnluacraft]: Sent event FMLServerStartedEvent to mod gnluacraft
 [12:35:22] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - LuaCraft took 0.004s
 [12:35:22] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStarted took 0.005s

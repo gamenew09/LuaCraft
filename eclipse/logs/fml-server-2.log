@@ -519,7 +519,7 @@
 [12:34:17] [Server thread/TRACE] [Forge/Forge]: Sent event FMLServerStartedEvent to mod Forge
 [12:34:17] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - Minecraft Forge took 0.000s
 [12:34:17] [Server thread/TRACE] [gnluacraft/gnluacraft]: Sending event FMLServerStartedEvent to mod gnluacraft
-[12:34:17] [Server thread/INFO] [STDOUT/gnluacraft]: [com.gamenew09.luacraft.lua.LuaLibraryLoader:runWorldLua:209]: G:\luacraft\eclipse\world\lua\main.lua
+[12:34:17] [Server thread/INFO] [STDOUT/gnluacraft]: [com.gamenew09.luacraft.lua.LuaImplementation:runWorldLua:209]: G:\luacraft\eclipse\world\lua\main.lua
 [12:34:17] [Server thread/TRACE] [gnluacraft/gnluacraft]: Sent event FMLServerStartedEvent to mod gnluacraft
 [12:34:17] [Server thread/DEBUG] [FML/]: Bar Step: ServerStarted - LuaCraft took 0.004s
 [12:34:17] [Server thread/DEBUG] [FML/]: Bar Finished: ServerStarted took 0.005s
@@ -535,7 +535,7 @@
 li.cil.repack.org.luaj.vm2.LuaError: load G:\luacraft\eclipse\.\world\lua\main.lua: li.cil.repack.org.luaj.vm2.LuaError: load @G:\luacraft\eclipse\.\world\lua\main.lua: java.lang.NullPointerException
 	at li.cil.repack.org.luaj.vm2.LuaValue.error(LuaValue.java:1179) ~[LuaValue.class:?]
 	at li.cil.repack.org.luaj.vm2.Globals.loadfile(Globals.java:183) ~[Globals.class:?]
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.runWorldLua(LuaLibraryLoader.java:210) ~[LuaLibraryLoader.class:?]
+	at com.gamenew09.luacraft.lua.LuaImplementation.runWorldLua(LuaLibraryLoader.java:210) ~[LuaLibraryLoader.class:?]
 	at com.gamenew09.luacraft.LuacraftMod.serverStarted(LuacraftMod.java:63) ~[LuacraftMod.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_65]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_65]

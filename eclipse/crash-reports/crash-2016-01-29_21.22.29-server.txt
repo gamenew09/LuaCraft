@@ -19,7 +19,7 @@ li.cil.repack.org.luaj.vm2.LuaError: [string "assets/gnluacraft/lua/serverstarte
 	at li.cil.repack.org.luaj.vm2.Globals.load(Globals.java:216)
 	at li.cil.repack.org.luaj.vm2.Globals.load(Globals.java:210)
 	at li.cil.repack.org.luaj.vm2.Globals.load(Globals.java:203)
-	at com.gamenew09.luacraft.lua.LuaLibraryLoader.runResourceFile(LuaLibraryLoader.java:76)
+	at com.gamenew09.luacraft.lua.LuaImplementation.runResourceFile(LuaLibraryLoader.java:76)
 	at com.gamenew09.luacraft.LuacraftMod.serverStarted(ExampleMod.java:22)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

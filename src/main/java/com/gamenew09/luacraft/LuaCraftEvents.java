@@ -1,6 +1,6 @@
 package com.gamenew09.luacraft;
 
-import com.gamenew09.luacraft.lua.LuaLibraryLoader;
+import com.gamenew09.luacraft.lua.LuaImplementation;
 import com.gamenew09.luacraft.lua.types.*;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -22,20 +22,20 @@ public class LuaCraftEvents {
     @SubscribeEvent
     public void onChatted(ServerChatEvent event)
     {
-        callAllHooks("Chatted", LuaLibraryLoader.getUserdata(new LuaPlayer(event.player)), LuaString.valueOf(event.message));
+        callAllHooks("Chatted", LuaImplementation.getUserdata(new LuaPlayer(event.player)), LuaString.valueOf(event.message));
     }
 
     @SubscribeEvent
     public void onPlayerDeath(LivingDeathEvent event){
         if(event.entity instanceof EntityPlayer){
-            callAllHooks("PlayerDeath", LuaLibraryLoader.getUserdata(new LuaPlayer((EntityPlayer) event.entity)), LuaLibraryLoader.getUserdata(event.source), LuaLibraryLoader.getUserdata(event.entityLiving));
+            callAllHooks("PlayerDeath", LuaImplementation.getUserdata(new LuaPlayer((EntityPlayer) event.entity)), LuaImplementation.getUserdata(event.source), LuaImplementation.getUserdata(event.entityLiving));
         }
     }
 
     @SubscribeEvent
     public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event)
     {
-        callAllHooks("PlayerAdded", LuaLibraryLoader.getUserdata(new LuaPlayer(event.player)));
+        callAllHooks("PlayerAdded", LuaImplementation.getUserdata(new LuaPlayer(event.player)));
     }
 
 }
