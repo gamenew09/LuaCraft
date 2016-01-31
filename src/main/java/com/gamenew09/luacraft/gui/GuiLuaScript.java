@@ -23,7 +23,7 @@ public class GuiLuaScript extends GuiScreen {
         return false;
     }
 
-    GuiTextField field;
+    GuiTextArea field;
 
     @Override
     public void initGui() {

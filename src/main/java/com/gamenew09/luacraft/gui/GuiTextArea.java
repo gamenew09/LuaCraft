@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by TylerDesktop on 1/30/2016.
  */
-public class GuiTextArea extends GuiTextField {
+public class GuiTextArea extends Gui{
     private final FontRenderer field_146211_a;
     public int xPosition;
     public int yPosition;
@@ -40,7 +40,9 @@ public class GuiTextArea extends GuiTextField {
     private boolean visible = true;
     private static final String __OBFID = "CL_00000670";
 
-    public GuiTextField(FontRenderer p_i1032_1_, int p_i1032_2_, int p_i1032_3_, int p_i1032_4_, int p_i1032_5_)
+
+
+    public GuiTextArea(FontRenderer p_i1032_1_, int p_i1032_2_, int p_i1032_3_, int p_i1032_4_, int p_i1032_5_)
     {
         this.field_146211_a = p_i1032_1_;
         this.xPosition = p_i1032_2_;
