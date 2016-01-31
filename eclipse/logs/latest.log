@@ -1,0 +1,27 @@
+[19:35:50] [main/INFO]: Setting user: Player373
+[19:35:51] [Client thread/INFO]: LWJGL Version: 2.9.1
+[19:36:01] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:LuaCraft
+[19:36:02] [Sound Library Loader/INFO]: Sound engine started
+[19:36:03] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
+[19:36:03] [Client thread/INFO]: Created: 16x16 textures/items-atlas
+[19:36:03] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:LuaCraft
+[19:36:03] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[19:36:03] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[19:36:04] [Sound Library Loader/INFO]: Sound engine started
+[19:36:16] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[19:36:16] [Server thread/INFO]: Generating keypair
+[19:36:16] [Server thread/INFO]: Preparing start region for level 0
+[19:36:17] [Server thread/INFO]: Changing view distance to 12, from 10
+[19:36:18] [Server thread/INFO]: Player373[local:E:59f85d69] logged in with entity id 68 at (152.7540243065178, 102.0, -151.4439012186698)
+[19:36:18] [Server thread/INFO]: Player373 joined the game
+[19:36:51] [Server thread/INFO]: Saving and pausing game...
+[19:36:51] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
+[19:36:52] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
+[19:36:52] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
+[19:36:52] [Server thread/INFO]: Stopping server
+[19:36:52] [Server thread/INFO]: Saving players
+[19:36:52] [Server thread/INFO]: Saving worlds
+[19:36:52] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
+[19:36:52] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
+[19:36:52] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
+[19:36:53] [Client thread/INFO]: Stopping!

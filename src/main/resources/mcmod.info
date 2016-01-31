@@ -1,0 +1,16 @@
+[
+{
+  "modid": "gnluacraft",
+  "name": "LuaCraft",
+  "description": "LuaCraft allows you to extend Minecraft using Lua.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["gamenew09"],
+  "credits": "OpenComputer for their LuaJ repack.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
