@@ -35,6 +35,11 @@ public class BlockLuaScript extends BlockContainer{
     }
 
     @Override
+    public int isProvidingWeakPower(IBlockAccess w, int x, int y, int z, int side) {
+        return ((TileEntityLuaScript)w.getTileEntity(x, y, z)).isProvidingWeakPower(w, x, y, z, side);
+    }
+
+    @Override
     public boolean onBlockActivated(World w, int x, int y, int z, EntityPlayer ply, int m, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
         ply.openGui(LuacraftMod.instance, 0, w, x, y, z);
         return true;

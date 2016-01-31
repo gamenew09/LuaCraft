@@ -4,6 +4,7 @@ import com.gamenew09.luacraft.LuacraftMod;
 import li.cil.repack.org.luaj.vm2.LuaValue;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,9 +22,18 @@ public class TileEntityLuaScript extends TileEntity {
 
     String start;
 
+    public TileEntityLuaScript(NBTTagCompound compound){
+        readFromNBT(compound);
+        for(int i = 0; i < powerArray.length; i++){
+            powerArray[i] = 15;
+        }
+    }
+
     public TileEntityLuaScript(String start){
         this.start = start;
-
+        for(int i = 0; i < powerArray.length; i++){
+            powerArray[i] = 15;
+        }
     }
 
     public void setScriptString(String scriptString) {
@@ -69,6 +79,20 @@ public class TileEntityLuaScript extends TileEntity {
     }
 
     public LuaValue runLua(){
-        return LuacraftMod.getWorldLua().run(scriptString);
+        try {
+            return LuacraftMod.getWorldLua().run(scriptString);
+        }catch (Exception ex){
+            return LuaValue.NIL;
+        }
+    }
+
+    private int[] powerArray = new int[6];
+
+    public int isProvidingWeakPower(IBlockAccess w, int x, int y, int z, int side) {
+        try {
+            return powerArray[side];
+        }catch (Throwable ex){
+            return 0;
+        }
     }
 }

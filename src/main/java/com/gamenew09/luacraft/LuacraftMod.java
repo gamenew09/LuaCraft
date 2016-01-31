@@ -2,6 +2,7 @@ package com.gamenew09.luacraft;
 
 import com.gamenew09.luacraft.block.BlockRegistry;
 import com.gamenew09.luacraft.lua.LuaLibraryLoader;
+import com.gamenew09.luacraft.networking.MessageUpdateLuaScriptTileEntity;
 import com.gamenew09.luacraft.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -11,6 +12,8 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 import li.cil.repack.org.luaj.vm2.LuaValue;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,11 +37,14 @@ public class LuacraftMod
     @SidedProxy(clientSide=Resources.MOD_PROXY_CLIENT, serverSide=Resources.MOD_PROXY_SERVER)
     public static CommonProxy proxy;
 
-
+    public static SimpleNetworkWrapper network;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        network = NetworkRegistry.INSTANCE.newSimpleChannel("MyChannel");
+        network.registerMessage(MessageUpdateLuaScriptTileEntity.Handler.class, MessageUpdateLuaScriptTileEntity.class, 0, Side.SERVER);
+
         coreLua = new LuaLibraryLoader();
         worldLua = new LuaLibraryLoader();
 
