@@ -56,6 +56,14 @@ public class LuaImplementation {
         tileEntityLuaScript = te;
     }
 
+    public void set(String name, LuaValue value){
+        globals.set(name, value);
+    }
+
+    public LuaValue get(String name){
+        return globals.get(name);
+    }
+
     /**
      * Helper function to create a Userdata object using CoerceJavaToLua.
      * @param obj

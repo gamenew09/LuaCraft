@@ -2,9 +2,11 @@ package com.gamenew09.luacraft;
 
 import com.gamenew09.luacraft.block.BlockRegistry;
 import com.gamenew09.luacraft.lua.LuaImplementation;
+import com.gamenew09.luacraft.lua.LuaProxyBlock;
 import com.gamenew09.luacraft.networking.luamessages.MessageSpawnParticle;
 import com.gamenew09.luacraft.networking.MessageUpdateLuaScriptTileEntity;
 import com.gamenew09.luacraft.proxy.CommonProxy;
+import com.gamenew09.luacraft.util.MinecraftPath;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -14,12 +16,18 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import li.cil.repack.org.luaj.vm2.LuaTable;
 import li.cil.repack.org.luaj.vm2.LuaValue;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
+import java.util.HashMap;
 
 @Mod(modid = Resources.MOD_ID, version = Resources.MOD_VERSION)
 public class LuacraftMod
@@ -40,9 +48,39 @@ public class LuacraftMod
 
     public static SimpleNetworkWrapper network;
 
+    boolean createDirectory(String path){
+        File dir = new File(path);
+
+        if(!dir.exists())
+            return dir.mkdir();
+        return false;
+    }
+
+    private HashMap<String, LuaProxyBlock> luaBlocks = new HashMap<String, LuaProxyBlock>();
+
+    private void registerLuaBlocks(){
+        File f = new File(MinecraftPath.getWorkingDirectory() + "\\lua\\blocks");
+        for (File luaFile : f.listFiles()) {
+            LuaImplementation blockLua = new LuaImplementation();
+            blockLua.set("BLOCK", new LuaTable());
+            blockLua.runFile(luaFile.getAbsolutePath());
+            LuaTable val = blockLua.get("BLOCK").checktable();
+            LuaProxyBlock block = new LuaProxyBlock(Material.rock, val);
+            block.setCreativeTab(CreativeTabs.tabBlock);
+            RegistryHelper.register(block);
+            luaBlocks.put(luaFile.getName().replace(".lua", ""), block);
+            System.out.println("Registered LuaProxyBlock: \""+luaFile.getName().replace(".lua", "")+"\"");
+        }
+    }
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        createDirectory(MinecraftPath.getWorkingDirectory() + "\\lua");
+        createDirectory(MinecraftPath.getWorkingDirectory() + "\\lua\\blocks");
+
+        registerLuaBlocks();
+
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Resources.MOD_ID+"channel");
         network.registerMessage(MessageUpdateLuaScriptTileEntity.Handler.class, MessageUpdateLuaScriptTileEntity.class, 0, Side.SERVER);
         network.registerMessage(MessageSpawnParticle.Handler.class, MessageSpawnParticle.class, 0, Side.CLIENT);
@@ -66,16 +104,9 @@ public class LuacraftMod
     @EventHandler
     public void serverStarted(FMLServerStartedEvent event)
     {
-        File luaDir = new File(MinecraftServer.getServer().getEntityWorld().getSaveHandler().getWorldDirectory().getAbsolutePath() + "\\lua");
+        createDirectory(MinecraftServer.getServer().getEntityWorld().getSaveHandler().getWorldDirectory().getAbsolutePath() + "\\lua");
 
-        if(!luaDir.exists())
-            luaDir.mkdir();
-
-        File luaBlockDir = new File(MinecraftServer.getServer().getEntityWorld().getSaveHandler().getWorldDirectory().getAbsolutePath() + "\\lua\\scriptblock\\");
-
-        if(!luaBlockDir.exists())
-            luaBlockDir.mkdir();
-
+        createDirectory(MinecraftServer.getServer().getEntityWorld().getSaveHandler().getWorldDirectory().getAbsolutePath() + "\\lua\\scriptblock\\");
 
         try {
             System.out.println(worldLua.runWorldLua(MinecraftServer.getServer().getEntityWorld(), "main.lua"));
