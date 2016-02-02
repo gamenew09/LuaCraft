@@ -52,6 +52,16 @@ public class BlockLuaScript extends BlockContainer{
     }
 
     @Override
+    public boolean hasComparatorInputOverride() {
+        return true;
+    }
+
+    @Override
+    public int getComparatorInputOverride(World w, int x, int y, int z, int side) {
+        return ((TileEntityLuaScript)w.getTileEntity(x, y, z)).getComparatorInputOverride(w, x, y, z, side);
+    }
+
+    @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new TileEntityLuaScript();
     }

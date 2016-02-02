@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -200,5 +201,19 @@ public class TileEntityLuaScript extends TileEntity {
         }catch (Exception ex){
             return false;
         }
+    }
+
+    private int comparatorInput = 0;
+
+    public void setComparatorInput(int comparatorInput) {
+        this.comparatorInput = comparatorInput;
+    }
+
+    public int getComparatorInput() {
+        return comparatorInput;
+    }
+
+    public int getComparatorInputOverride(World w, int x, int y, int z, int side) {
+        return getComparatorInput();
     }
 }

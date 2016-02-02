@@ -199,6 +199,20 @@ public class LuaImplementation {
             }
         });
 
+        redstoneMap.put("comparatorOutput", new VarArgFunction() {
+            @Override
+            public Varargs invoke(Varargs args) {
+                if(tileEntityLuaScript == null)
+                    throw new LuaError("\"redstone.output\" can only be used in \"LuaScript\" blocks.");
+
+                int power = args.toint(1);
+
+                tileEntityLuaScript.setComparatorInput(power);
+
+                return createVarArgs(LuaValue.valueOf(power));
+            }
+        });
+
         redstoneMap.put("isPoweredIndirectly", new VarArgFunction() {
             @Override
             public Varargs invoke(Varargs args) {
