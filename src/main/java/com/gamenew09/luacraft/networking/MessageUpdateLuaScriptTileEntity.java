@@ -127,7 +127,7 @@ public class MessageUpdateLuaScriptTileEntity implements IMessage {
         public IMessage onMessage(MessageUpdateLuaScriptTileEntity message, MessageContext ctx) {
             if(!message.isCorrupted()){
                 String str = "("+message.x+","+message.y+","+message.z+")";
-                System.out.println("Tried to update tile entity at "+str+ " in DIM "+ message.dim + ". Success: " + message.updateTileEntity());
+                System.out.println("Trying to update tile entity at "+str+ " in DIM "+ message.dim + ". Success: " + message.updateTileEntity());
             }
             return null; // no response in this case
         }

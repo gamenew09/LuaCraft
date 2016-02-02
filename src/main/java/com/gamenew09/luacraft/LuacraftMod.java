@@ -2,6 +2,7 @@ package com.gamenew09.luacraft;
 
 import com.gamenew09.luacraft.block.BlockRegistry;
 import com.gamenew09.luacraft.lua.LuaImplementation;
+import com.gamenew09.luacraft.networking.luamessages.MessageSpawnParticle;
 import com.gamenew09.luacraft.networking.MessageUpdateLuaScriptTileEntity;
 import com.gamenew09.luacraft.proxy.CommonProxy;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -44,6 +45,7 @@ public class LuacraftMod
     {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(Resources.MOD_ID+"channel");
         network.registerMessage(MessageUpdateLuaScriptTileEntity.Handler.class, MessageUpdateLuaScriptTileEntity.class, 0, Side.SERVER);
+        network.registerMessage(MessageSpawnParticle.Handler.class, MessageSpawnParticle.class, 0, Side.CLIENT);
 
         coreLua = new LuaImplementation();
         worldLua = new LuaImplementation();

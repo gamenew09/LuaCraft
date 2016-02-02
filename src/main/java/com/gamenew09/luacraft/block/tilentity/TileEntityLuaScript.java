@@ -65,7 +65,7 @@ public class TileEntityLuaScript extends TileEntity {
     }
 
     public String getFileName(){
-        return "("+xCoord+","+yCoord+","+zCoord+")";
+        return "DIM"+ getWorldObj().provider.dimensionId +"("+xCoord+","+yCoord+","+zCoord+")";
     }
 
     public File getFileObject(){

@@ -30,4 +30,5 @@ bin/
 # Minecraft Forge Specific
 out/
 eclipse/
+eclipse/*
 logs/

@@ -1,13 +1,14 @@
 package com.gamenew09.luacraft.lua;
 
+import com.gamenew09.luacraft.LuacraftMod;
 import com.gamenew09.luacraft.Resources;
 import com.gamenew09.luacraft.block.tilentity.TileEntityLuaScript;
 import com.gamenew09.luacraft.lua.types.LuaItemstack;
+import com.gamenew09.luacraft.networking.luamessages.MessageSpawnParticle;
 import cpw.mods.fml.common.registry.GameRegistry;
 import li.cil.repack.org.luaj.vm2.*;
 import li.cil.repack.org.luaj.vm2.lib.VarArgFunction;
 import li.cil.repack.org.luaj.vm2.lib.jse.CoerceJavaToLua;
-import li.cil.repack.org.luaj.vm2.lib.jse.CoerceLuaToJava;
 import li.cil.repack.org.luaj.vm2.lib.jse.JsePlatform;
 import net.minecraft.block.Block;
 import net.minecraft.server.MinecraftServer;
@@ -120,6 +121,29 @@ public class LuaImplementation {
                 }
 
                 return boolVarArgs(w.setBlock(args.toint(1), args.toint(2), args.toint(3), Block.getBlockFromName(args.tojstring(4)), mdata, 3));
+            }
+        });
+
+        worldMap.put("spawnParticle", new VarArgFunction() {
+            @Override
+            public Varargs invoke(Varargs args) {
+                if(MinecraftServer.getServer() == null){
+                    return createVarArgs(LuaBoolean.valueOf(false));
+                }
+
+                World w = MinecraftServer.getServer().getEntityWorld();
+
+                double x = 0, y = 0, z = 0;
+
+                if(args.narg() >= 7){
+                    x = args.toint(5);
+                    y = args.toint(6);
+                    z = args.toint(7);
+                }
+
+                LuacraftMod.network.sendToDimension(new MessageSpawnParticle(args.tojstring(1), args.todouble(2), args.todouble(3), args.todouble(4), x, y, z, w.provider.dimensionId), w.provider.dimensionId);
+
+                return args.eval();
             }
         });
 
