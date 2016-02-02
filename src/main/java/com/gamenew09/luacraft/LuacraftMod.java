@@ -64,11 +64,16 @@ public class LuacraftMod
     @EventHandler
     public void serverStarted(FMLServerStartedEvent event)
     {
-        String path = MinecraftServer.getServer().getEntityWorld().getSaveHandler().getWorldDirectory().getAbsolutePath() + "\\lua";
-        File luaDir = new File(path);
+        File luaDir = new File(MinecraftServer.getServer().getEntityWorld().getSaveHandler().getWorldDirectory().getAbsolutePath() + "\\lua");
 
         if(!luaDir.exists())
             luaDir.mkdir();
+
+        File luaBlockDir = new File(MinecraftServer.getServer().getEntityWorld().getSaveHandler().getWorldDirectory().getAbsolutePath() + "\\lua\\scriptblock\\");
+
+        if(!luaBlockDir.exists())
+            luaBlockDir.mkdir();
+
 
         try {
             System.out.println(worldLua.runWorldLua(MinecraftServer.getServer().getEntityWorld(), "main.lua"));

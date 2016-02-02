@@ -110,10 +110,10 @@ public class LuaImplementation {
                 int mdata = 0;
 
                 if(args.narg() >= 5){
-                    mdata = args.toint(4);
+                    mdata = args.toint(5);
                 }
 
-                return boolVarArgs(w.setBlock(args.toint(0), args.toint(1), args.toint(2), Block.getBlockFromName(args.tojstring(3)), mdata, 3));
+                return boolVarArgs(w.setBlock(args.toint(1), args.toint(2), args.toint(3), Block.getBlockFromName(args.tojstring(4)), mdata, 3));
             }
         });
 
@@ -175,6 +175,24 @@ public class LuaImplementation {
             }
         });
 
+        redstoneMap.put("outputAll", new VarArgFunction() {
+            @Override
+            public Varargs invoke(Varargs args) {
+                if(tileEntityLuaScript == null)
+                    throw new LuaError("\"redstone.output\" can only be used in \"LuaScript\" blocks.");
+
+                int power = args.toint(1);
+
+                LuaValue[] powers = new LuaValue[6];
+
+                for(int i = 0; i < powers.length; i++){
+                    powers[i] = LuaValue.valueOf(tileEntityLuaScript.setPowerStatus(i, power));
+                }
+
+                return createVarArgs(powers);
+            }
+        });
+
         redstoneMap.put("isPoweredIndirectly", new VarArgFunction() {
             @Override
             public Varargs invoke(Varargs args) {
@@ -200,6 +218,16 @@ public class LuaImplementation {
         });
 
         globals.set("redstone", createTableFromHashMap(redstoneMap));
+
+        if(tileEntityLuaScript != null){
+            HashMap<String, LuaValue> blockInfo = new HashMap<String, LuaValue>();
+
+            blockInfo.put("x", LuaValue.valueOf(tileEntityLuaScript.xCoord));
+            blockInfo.put("y", LuaValue.valueOf(tileEntityLuaScript.yCoord));
+            blockInfo.put("z", LuaValue.valueOf(tileEntityLuaScript.zCoord));
+
+            globals.set("blockinfo", createTableFromHashMap(blockInfo));
+        }
     }
 
     public void setTileEntity(TileEntityLuaScript tileEntityLuaScript) {

@@ -1,15 +1,19 @@
 package com.gamenew09.luacraft.networking;
 
 import com.gamenew09.luacraft.block.tilentity.TileEntityLuaScript;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+
+import java.io.FileInputStream;
 
 /**
  * Created by TylerDesktop on 1/30/2016.
@@ -17,7 +21,7 @@ import net.minecraft.world.World;
 public class MessageUpdateLuaScriptTileEntity implements IMessage {
 
     private int x, y, z, dim;
-    private NBTTagCompound compound;
+    private String script;
 
     private boolean corrupted = false;
 
@@ -26,8 +30,7 @@ public class MessageUpdateLuaScriptTileEntity implements IMessage {
         y = te.yCoord;
         z = te.zCoord;
         dim = te.getWorldObj().provider.dimensionId;
-        compound = new NBTTagCompound();
-        te.writeToNBT(compound);
+        script = "";
     }
 
     /**
@@ -37,12 +40,12 @@ public class MessageUpdateLuaScriptTileEntity implements IMessage {
 
     }
 
-    public MessageUpdateLuaScriptTileEntity(int x, int y, int z, int dim, NBTTagCompound compound){
+    public MessageUpdateLuaScriptTileEntity(int x, int y, int z, int dim, String script){
         this.x = x;
         this.y = y;
         this.z = z;
         this.dim = dim;
-        this.compound = compound;
+        this.script = script;
     }
 
     public int getX() {
@@ -61,8 +64,8 @@ public class MessageUpdateLuaScriptTileEntity implements IMessage {
         return dim;
     }
 
-    public NBTTagCompound getCompound() {
-        return compound;
+    public String getScript() {
+        return script;
     }
 
     /**
@@ -77,9 +80,6 @@ public class MessageUpdateLuaScriptTileEntity implements IMessage {
         this.dim = dim;
     }
 
-    public void setCompound(NBTTagCompound compound) {
-        this.compound = compound;
-    }
 
     public void setX(int x) {
         this.x = x;
@@ -93,45 +93,16 @@ public class MessageUpdateLuaScriptTileEntity implements IMessage {
         this.z = z;
     }
 
+    public void setScript(String script) {
+        this.script = script;
+    }
+
     public boolean updateTileEntity(){
-        if(compound == null)
-            return false;
-        TileEntityLuaScript script = new TileEntityLuaScript(compound);
         World w = MinecraftServer.getServer().worldServerForDimension(dim);
-        w.setTileEntity(x, y, z, script);
-        return true;
-    }
-
-    boolean writeNbt(ByteBuf buf, NBTTagCompound compound) {
-        try {
-            if (compound == null) {
-                buf.writeShort(-1);
-            } else {
-                byte[] abyte = CompressedStreamTools.compress(compound);
-                buf.writeShort((short) abyte.length);
-                buf.writeBytes(abyte);
-            }
-            return true;
-        }catch (Exception ex){
-            return false;
-        }
-    }
-
-    NBTTagCompound readNbt(ByteBuf buf) {
-        corrupted = false;
-        try {
-            short len = buf.readShort();
-            if (len == -1) {
-                return null;
-            } else {
-                byte[] bytes = new byte[len];
-                buf.readBytes(bytes);
-                return CompressedStreamTools.func_152457_a(bytes, new NBTSizeTracker(2097152L));
-            }
-        }catch (Exception ex){
-            corrupted = true;
-            return null;
-        }
+        TileEntityLuaScript scr = (TileEntityLuaScript) w.getTileEntity(x, y, z);
+        scr.setScriptString(this.script);
+        w.setTileEntity(x, y, z, scr);
+        return scr.saveFile();
     }
 
     @Override
@@ -139,7 +110,7 @@ public class MessageUpdateLuaScriptTileEntity implements IMessage {
         x = buf.readInt();
         y = buf.readInt();
         z = buf.readInt();
-        compound = readNbt(buf);
+        script = ByteBufUtils.readUTF8String(buf);
     }
 
     @Override
@@ -147,7 +118,7 @@ public class MessageUpdateLuaScriptTileEntity implements IMessage {
         buf.writeInt(x);
         buf.writeInt(y);
         buf.writeInt(z);
-        writeNbt(buf, compound);
+        ByteBufUtils.writeUTF8String(buf, script);
     }
 
     public static class Handler implements IMessageHandler<MessageUpdateLuaScriptTileEntity, IMessage> {
