@@ -109,6 +109,12 @@ public class LuaImplementation {
 
                 int mdata = 0;
 
+                if(tileEntityLuaScript != null){
+                    if(tileEntityLuaScript.xCoord == args.toint(1) || tileEntityLuaScript.yCoord == args.toint(2) || tileEntityLuaScript.zCoord == args.toint(3)){
+                        return boolVarArgs(false);
+                    }
+                }
+
                 if(args.narg() >= 5){
                     mdata = args.toint(5);
                 }
