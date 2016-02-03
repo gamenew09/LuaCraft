@@ -1,57 +1,28 @@
-[14:33:31] [main/INFO]: Setting user: Player981
-[14:33:32] [Client thread/INFO]: LWJGL Version: 2.9.1
-[14:33:41] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:LuaCraft
-[14:33:43] [Sound Library Loader/INFO]: Sound engine started
-[14:33:43] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
-[14:33:43] [Client thread/INFO]: Created: 16x16 textures/items-atlas
-[14:33:43] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:LuaCraft
-[14:33:44] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
-[14:33:44] [Client thread/INFO]: Created: 256x256 textures/items-atlas
-[14:33:45] [Sound Library Loader/INFO]: Sound engine started
-[14:33:49] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
-[14:33:49] [Server thread/INFO]: Generating keypair
-[14:33:49] [Server thread/INFO]: Preparing start region for level 0
-[14:33:50] [Server thread/INFO]: Changing view distance to 12, from 10
-[14:33:51] [Server thread/INFO]: Player981[local:E:36d9aeb6] logged in with entity id 64 at (163.40782754249258, 102.0, -150.82575024003305)
-[14:33:51] [Server thread/INFO]: Player981 joined the game
-[14:34:06] [Server thread/INFO]: Saving and pausing game...
-[14:34:06] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:34:06] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:34:06] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:34:12] [Server thread/INFO]: Player981 has just earned the achievement [Taking Inventory]
-[14:34:12] [Client thread/INFO]: [CHAT] Player981 has just earned the achievement [Taking Inventory]
-[14:36:18] [Server thread/INFO]: Saving and pausing game...
-[14:36:18] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:36:18] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:36:18] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:36:28] [Server thread/INFO]: Saving and pausing game...
-[14:36:28] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:36:28] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:36:28] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:36:31] [Server thread/INFO]: Saving and pausing game...
-[14:36:31] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:36:31] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:36:31] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:36:38] [Server thread/INFO]: Saving and pausing game...
-[14:36:38] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:36:38] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:36:38] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:36:45] [Server thread/INFO]: Saving and pausing game...
-[14:36:45] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:36:45] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:36:45] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:36:53] [Server thread/INFO]: Saving and pausing game...
-[14:36:53] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:36:53] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:36:53] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:37:01] [Server thread/INFO]: Saving and pausing game...
-[14:37:01] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:37:01] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:37:01] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:37:06] [Server thread/INFO]: Stopping server
-[14:37:06] [Server thread/INFO]: Saving players
-[14:37:06] [Server thread/INFO]: Saving worlds
-[14:37:06] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
-[14:37:06] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
-[14:37:06] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
-[14:37:07] [Client thread/INFO]: Stopping!
+[11:38:21] [main/INFO]: Setting user: Player587
+[11:38:23] [Client thread/INFO]: LWJGL Version: 2.9.1
+[11:38:32] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:LuaCraft
+[11:38:33] [Sound Library Loader/INFO]: Sound engine started
+[11:38:33] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
+[11:38:33] [Client thread/INFO]: Created: 16x16 textures/items-atlas
+[11:38:33] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:LuaCraft
+[11:38:34] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[11:38:34] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[11:38:35] [Sound Library Loader/INFO]: Sound engine started
+[11:38:39] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[11:38:39] [Server thread/INFO]: Generating keypair
+[11:38:39] [Server thread/INFO]: Preparing start region for level 0
+[11:38:40] [Server thread/INFO]: Preparing spawn area: 94%
+[11:38:41] [Server thread/INFO]: Changing view distance to 16, from 10
+[11:38:41] [Server thread/INFO]: Player587[local:E:c5fb1c8c] logged in with entity id 107 at (126.61714968727384, 93.16303186394614, -107.85696202340836)
+[11:38:41] [Server thread/INFO]: Player587 joined the game
+[11:38:58] [Server thread/INFO]: Saving and pausing game...
+[11:38:58] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
+[11:38:58] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
+[11:38:58] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
+[11:39:22] [Server thread/INFO]: Stopping server
+[11:39:22] [Server thread/INFO]: Saving players
+[11:39:22] [Server thread/INFO]: Saving worlds
+[11:39:22] [Server thread/INFO]: Saving chunks for level 'Test123'/Overworld
+[11:39:22] [Server thread/INFO]: Saving chunks for level 'Test123'/Nether
+[11:39:22] [Server thread/INFO]: Saving chunks for level 'Test123'/The End
+[11:39:23] [Client thread/INFO]: Stopping!
