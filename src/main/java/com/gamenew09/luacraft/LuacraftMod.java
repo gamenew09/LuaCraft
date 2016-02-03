@@ -25,6 +25,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
+import org.lwjgl.Sys;
 
 import java.io.File;
 import java.util.HashMap;
@@ -61,15 +62,21 @@ public class LuacraftMod
     private void registerLuaBlocks(){
         File f = new File(MinecraftPath.getWorkingDirectory() + "\\lua\\blocks");
         for (File luaFile : f.listFiles()) {
-            LuaImplementation blockLua = new LuaImplementation();
-            blockLua.set("BLOCK", new LuaTable());
-            blockLua.runFile(luaFile.getAbsolutePath());
-            LuaTable val = blockLua.get("BLOCK").checktable();
-            LuaProxyBlock block = new LuaProxyBlock(Material.rock, val);
-            block.setCreativeTab(CreativeTabs.tabBlock);
-            RegistryHelper.register(block);
-            luaBlocks.put(luaFile.getName().replace(".lua", ""), block);
-            System.out.println("Registered LuaProxyBlock: \""+luaFile.getName().replace(".lua", "")+"\"");
+            try {
+                LuaImplementation blockLua = new LuaImplementation();
+                blockLua.register();
+                blockLua.set("BLOCK", new LuaTable());
+                LuaValue val = blockLua.runFile(luaFile.getAbsolutePath());
+
+                LuaProxyBlock block = new LuaProxyBlock(Material.rock, val.checktable(), blockLua);
+                block.setCreativeTab(CreativeTabs.tabBlock);
+                RegistryHelper.register(block);
+                luaBlocks.put(luaFile.getName().replace(".lua", ""), block);
+                System.out.println("Registered LuaProxyBlock: \"" + luaFile.getName().replace(".lua", "") + "\"");
+            }catch (Exception ex){
+                System.out.print("Error occurred from \""+ luaFile.getAbsolutePath()+"\": ");
+                ex.printStackTrace();
+            }
         }
     }
 

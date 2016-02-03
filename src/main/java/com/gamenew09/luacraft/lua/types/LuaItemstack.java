@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 /**
  * Created by TylerDesktop on 1/30/2016.
  */
-public class LuaItemstack {
+public class LuaItemstack extends LuaBase{
 
     private ItemStack itemStack;
 

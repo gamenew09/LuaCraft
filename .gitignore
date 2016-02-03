@@ -31,4 +31,6 @@ bin/
 out/
 eclipse/
 eclipse/*
+# I'm hoping this works since I need to have the eclipse folder stop putting unnecessary data in my commits.
+eclipse/**
 logs/

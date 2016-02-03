@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 /**
  * Created by TylerDesktop on 1/30/2016.
  */
-public class LuaPlayer {
+public class LuaPlayer extends LuaBase{
 
     private EntityPlayer player;
 

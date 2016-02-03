@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 /**
  * Created by TylerDesktop on 2/2/2016.
  */
-public class LuaPlant {
+public class LuaPlant extends LuaBase{
 
     private int x, y, z;
     private ForgeDirection direction;

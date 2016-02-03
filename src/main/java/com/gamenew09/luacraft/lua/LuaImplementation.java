@@ -3,14 +3,17 @@ package com.gamenew09.luacraft.lua;
 import com.gamenew09.luacraft.LuacraftMod;
 import com.gamenew09.luacraft.Resources;
 import com.gamenew09.luacraft.block.tilentity.TileEntityLuaScript;
+import com.gamenew09.luacraft.lua.types.LuaBase;
 import com.gamenew09.luacraft.lua.types.LuaItemstack;
 import com.gamenew09.luacraft.networking.luamessages.MessageSpawnParticle;
 import cpw.mods.fml.common.registry.GameRegistry;
 import li.cil.repack.org.luaj.vm2.*;
 import li.cil.repack.org.luaj.vm2.lib.VarArgFunction;
 import li.cil.repack.org.luaj.vm2.lib.jse.CoerceJavaToLua;
+import li.cil.repack.org.luaj.vm2.lib.jse.CoerceLuaToJava;
 import li.cil.repack.org.luaj.vm2.lib.jse.JsePlatform;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
@@ -51,6 +54,18 @@ public class LuaImplementation {
         globals = JsePlatform.standardGlobals();
     }
 
+    public LuaValue coerce(Object o){
+        return CoerceJavaToLua.coerce(o);
+    }
+
+    public Object coerceClass(LuaValue val, Class clazz){
+        return CoerceLuaToJava.coerce(val, clazz);
+    }
+
+    public<T extends LuaBase> T coerce(LuaValue val, Class<T> object){
+        return (T) CoerceLuaToJava.coerce(val, object);
+    }
+
     public LuaImplementation(TileEntityLuaScript te){
         this();
         tileEntityLuaScript = te;
@@ -73,19 +88,52 @@ public class LuaImplementation {
         return CoerceJavaToLua.coerce(obj);
     }
 
+    public Object invoke(String func, Object... parameters) {
+        if (parameters != null && parameters.length > 0) {
+            LuaValue[] values = new LuaValue[parameters.length];
+            for (int i = 0; i < parameters.length; i++)
+                values[i] = CoerceJavaToLua.coerce(parameters[i]);
+            return globals.get(func).invoke(values);
+        } else
+            return globals.get(func).invoke();
+    }
+
+    /**
+     * BUG: When invoking a function from a table, you cannot pass any paramaters otherwise in Lua it shows as no paramaters at all. LuaJ bug?
+     * @param tbl
+     * @param func
+     * @param parameters
+     * @return
+     */
+    public static Object invokeFromTable(LuaTable tbl, String func, Object... parameters) {
+        if (parameters != null && parameters.length > 0) {
+            LuaValue[] values = new LuaValue[parameters.length];
+            for (int i = 0; i < parameters.length; i++)
+                values[i] = CoerceJavaToLua.coerce(parameters[i]);
+            return tbl.rawget(func).invoke(values);
+        } else
+            return tbl.rawget(func).invoke();
+    }
 
     private void registerEnums(){
         HashMap<String, LuaValue> enumMap = new HashMap<String, LuaValue>();
 
         HashMap<String, LuaValue> enumBlockFace = new HashMap<String, LuaValue>();
-        enumBlockFace.put("Down", LuaInteger.valueOf(1));
-        enumBlockFace.put("Up", LuaInteger.valueOf(0));
+        enumBlockFace.put("Down", LuaInteger.valueOf(0));
+        enumBlockFace.put("Up", LuaInteger.valueOf(1));
         enumBlockFace.put("North", LuaInteger.valueOf(2));
         enumBlockFace.put("South", LuaInteger.valueOf(3));
         enumBlockFace.put("West", LuaInteger.valueOf(4));
         enumBlockFace.put("East", LuaInteger.valueOf(5));
 
         enumMap.put("BlockFace", createTableFromHashMap(enumBlockFace));
+
+        HashMap<String, LuaValue> enumMaterials = new HashMap<String, LuaValue>();
+        enumMaterials.put("Rock", getUserdata(Material.rock));
+        enumMaterials.put("Grass", getUserdata(Material.grass));
+        enumMaterials.put("Clay", getUserdata(Material.clay));
+
+        enumMap.put("Material", createTableFromHashMap(enumMaterials));
 
         globals.set("Enum", createTableFromHashMap(enumMap));
     }
@@ -101,7 +149,7 @@ public class LuaImplementation {
             @Override
             public Varargs invoke(Varargs args) {
                 if(MinecraftServer.getServer() == null){
-                    return createVarArgs(LuaBoolean.valueOf(false));
+                    return createLuaValueVarArgs(LuaBoolean.valueOf(false));
                 }
                 return boolVarArgs(MinecraftServer.getServer().getEntityWorld() != null);
             }
@@ -111,7 +159,7 @@ public class LuaImplementation {
             @Override
             public Varargs invoke(Varargs args) {
                 if(MinecraftServer.getServer() == null){
-                    return createVarArgs(LuaBoolean.valueOf(false));
+                    return createLuaValueVarArgs(LuaBoolean.valueOf(false));
                 }
 
                 World w = MinecraftServer.getServer().getEntityWorld();
@@ -136,7 +184,7 @@ public class LuaImplementation {
             @Override
             public Varargs invoke(Varargs args) {
                 if(MinecraftServer.getServer() == null){
-                    return createVarArgs(LuaBoolean.valueOf(false));
+                    return createLuaValueVarArgs(LuaBoolean.valueOf(false));
                 }
 
                 World w = MinecraftServer.getServer().getEntityWorld();
@@ -192,7 +240,7 @@ public class LuaImplementation {
                     mod = split[0];
                 }
                 System.out.println(mod + ":" + name);
-                return createVarArgs(getUserdata(new LuaItemstack(GameRegistry.findItemStack(mod, name, 1))));
+                return createLuaValueVarArgs(getUserdata(new LuaItemstack(GameRegistry.findItemStack(mod, name, 1))));
             }
         });
 
@@ -209,7 +257,7 @@ public class LuaImplementation {
                 int side = args.toint(1);
                 int power = args.toint(2);
 
-                return createVarArgs(LuaValue.valueOf(tileEntityLuaScript.setPowerStatus(side, power)));
+                return createLuaValueVarArgs(LuaValue.valueOf(tileEntityLuaScript.setPowerStatus(side, power)));
             }
         });
 
@@ -227,7 +275,7 @@ public class LuaImplementation {
                     powers[i] = LuaValue.valueOf(tileEntityLuaScript.setPowerStatus(i, power));
                 }
 
-                return createVarArgs(powers);
+                return createLuaValueVarArgs(powers);
             }
         });
 
@@ -241,7 +289,7 @@ public class LuaImplementation {
 
                 tileEntityLuaScript.setComparatorInput(power);
 
-                return createVarArgs(LuaValue.valueOf(power));
+                return createLuaValueVarArgs(LuaValue.valueOf(power));
             }
         });
 
@@ -265,7 +313,7 @@ public class LuaImplementation {
                     if(args.narg() > 3)
                         dim = args.toint(4);
                 }
-                return createVarArgs(LuaValue.valueOf(MinecraftServer.getServer().worldServerForDimension(dim).isBlockIndirectlyGettingPowered(x, y, z)));
+                return createLuaValueVarArgs(LuaValue.valueOf(MinecraftServer.getServer().worldServerForDimension(dim).isBlockIndirectlyGettingPowered(x, y, z)));
             }
         });
 
@@ -319,12 +367,21 @@ public class LuaImplementation {
     }
 
     Varargs boolVarArgs(boolean b){
-        return createVarArgs(LuaBoolean.valueOf(b));
+        return createLuaValueVarArgs(LuaBoolean.valueOf(b));
     }
 
-    Varargs createVarArgs(final LuaValue... vals){
+    Varargs createLuaValueVarArgs(final LuaValue... vals){
         return new ArrayVarargs(vals);
     }
+
+    public static Varargs createVarArgs(final Object... vals){
+        LuaValue[] v = new LuaValue[vals.length];
+        for (int i = 0; i < v.length; i++) {
+            v[i] = CoerceJavaToLua.coerce(vals[i]);
+        }
+        return new ArrayVarargs(v);
+    }
+
 
     LuaTable createTableFromHashMap(HashMap<String, LuaValue> map){
         LuaTable tbl = new LuaTable(map.size(), map.size() >> 1);
