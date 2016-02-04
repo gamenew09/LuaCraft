@@ -1,6 +1,6 @@
 package com.gamenew09.luacraft.lua;
 
-import li.cil.repack.org.luaj.vm2.*;
+import com.gamenew09.repack.org.luaj.vm2.*;
 
 /**
  * Created by TylerDesktop on 1/29/2016.
@@ -46,6 +46,6 @@ public class ArrayVarargs extends Varargs {
             LuaValue.argerror(1, "start must be > 0");
         }
 
-        return (Varargs)(start == 1?this:(start > this.length?this.more.subargs(start - this.length):LuaValue.varargsOf(this.v, this.offset + start - 1, this.length - (start - 1), this.more)));
+        return start == 1 ? this : (start > this.length ? this.more.subargs(start - this.length) : LuaValue.varargsOf(this.v, this.offset + start - 1, this.length - (start - 1), this.more));
     }
 }

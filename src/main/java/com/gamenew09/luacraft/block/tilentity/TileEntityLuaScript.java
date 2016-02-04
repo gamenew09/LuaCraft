@@ -2,7 +2,7 @@ package com.gamenew09.luacraft.block.tilentity;
 
 import com.gamenew09.luacraft.LuacraftMod;
 import com.gamenew09.luacraft.lua.LuaImplementation;
-import li.cil.repack.org.luaj.vm2.LuaValue;
+import com.gamenew09.repack.org.luaj.vm2.LuaValue;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;

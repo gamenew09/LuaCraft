@@ -6,8 +6,8 @@ import com.gamenew09.luacraft.lua.types.LuaPlant;
 import com.gamenew09.luacraft.util.ItemStackHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import li.cil.repack.org.luaj.vm2.*;
-import li.cil.repack.org.luaj.vm2.lib.jse.CoerceLuaToJava;
+import com.gamenew09.repack.org.luaj.vm2.*;
+import com.gamenew09.repack.org.luaj.vm2.lib.jse.CoerceLuaToJava;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -125,9 +125,12 @@ public class LuaProxyBlock extends Block {
             return stacks;
         }catch (Exception ex){
             ex.printStackTrace();
+
             return super.getDrops(world, x, y, z, metadata, fortune);
         }
     }
+
+
 
     @Override
     @SideOnly(Side.CLIENT)

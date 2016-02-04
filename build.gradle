@@ -39,7 +39,7 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-	embedded files('libs/OC-LuaJ-master.jar') // NOTE: This is currently built without my package name, so OpenComputers probably won't work. I'll compile it later.
+    // runtime files('libs/OC-LuaJ-master.jar') // NOTE: This is currently built without my package name, so OpenComputers probably won't work. I'll compile it later.
 }
 
 processResources

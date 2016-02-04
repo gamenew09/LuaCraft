@@ -5,15 +5,17 @@ import com.gamenew09.luacraft.Resources;
 import com.gamenew09.luacraft.block.tilentity.TileEntityLuaScript;
 import com.gamenew09.luacraft.lua.types.LuaBase;
 import com.gamenew09.luacraft.lua.types.LuaItemstack;
+import com.gamenew09.luacraft.lua.types.LuaNBT;
 import com.gamenew09.luacraft.networking.luamessages.MessageSpawnParticle;
 import cpw.mods.fml.common.registry.GameRegistry;
-import li.cil.repack.org.luaj.vm2.*;
-import li.cil.repack.org.luaj.vm2.lib.VarArgFunction;
-import li.cil.repack.org.luaj.vm2.lib.jse.CoerceJavaToLua;
-import li.cil.repack.org.luaj.vm2.lib.jse.CoerceLuaToJava;
-import li.cil.repack.org.luaj.vm2.lib.jse.JsePlatform;
+import com.gamenew09.repack.org.luaj.vm2.*;
+import com.gamenew09.repack.org.luaj.vm2.lib.VarArgFunction;
+import com.gamenew09.repack.org.luaj.vm2.lib.jse.CoerceJavaToLua;
+import com.gamenew09.repack.org.luaj.vm2.lib.jse.CoerceLuaToJava;
+import com.gamenew09.repack.org.luaj.vm2.lib.jse.JsePlatform;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
@@ -138,10 +140,24 @@ public class LuaImplementation {
         globals.set("Enum", createTableFromHashMap(enumMap));
     }
 
+    private void registerTest() {
+        HashMap<String, LuaValue> testMap = new HashMap<String, LuaValue>();
+
+        testMap.put("customNbt", new VarArgFunction() {
+            @Override
+            public Varargs invoke(Varargs args) {
+                return createVarArgs(new LuaNBT(new NBTTagCompound()));
+            }
+        });
+
+        globals.set("test", createTableFromHashMap(testMap));
+    }
+
     TileEntityLuaScript tileEntityLuaScript = null;
 
     public void register(){
         registerEnums();
+        registerTest();
 
         HashMap<String, LuaValue> worldMap = new HashMap<String, LuaValue>();
 
